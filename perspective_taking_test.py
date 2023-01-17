@@ -11,6 +11,7 @@ import builtins
 import math
 import sys
 import time
+import os
 
 ##################
 # task specifications
@@ -75,7 +76,8 @@ def main():
 
     builtins.result_file = result_file
     builtins.errors = []
-    builtins.task_id = 0
+    builtins.task_id = 1 #Skip example
+    builtins.subject_id = subject_id
     load_task(builtins.task_id)
 
     plt.show()
@@ -201,6 +203,18 @@ def on_key_press(EVENT):
             builtins.result_file.write('Average Error: ' + str(round(avg_error, 4)))
             builtins.result_file.close()
             print('The test has terminated successfully. Results saved to file ' + builtins.result_file.name + '.')
+
+            write_header_to_overall_result_file = False
+            if not os.path.exists('results-all.txt'):
+                write_header_to_overall_result_file = True
+            overall_result_file = open('results-all.txt', 'a')
+
+            if write_header_to_overall_result_file:
+                overall_result_file.write('ParticipantID,MeanError,StdDevError\n')
+            overall_result_file.write(str(builtins.subject_id) + ',' + str(round(np.mean(builtins.errors), 4)) + ',' + str(round(np.std(builtins.errors), 4)) + '\n')
+            overall_result_file.close()
+            print('Overall results saved to file ' + overall_result_file.name + '.')
+
             sys.exit(0)
 
 
