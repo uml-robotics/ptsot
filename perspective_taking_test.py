@@ -184,11 +184,11 @@ def on_click(EVENT):
 
 
 def on_key_press(EVENT):
-    if EVENT.key == ' ':
+    if EVENT.key == ' ' or EVENT.key == 's':
         if builtins.task_id > 0: # exclude example
             correct_angle = round(TASK_ITEMS[builtins.task_id][3], 4)
-            logged_angle = round(compute_response_line_angle(), 4)
-            error = round(angle_difference(correct_angle, logged_angle), 4)
+            logged_angle = round(compute_response_line_angle(), 4) if EVENT.key == ' ' else 'NA'
+            error = round(angle_difference(correct_angle, logged_angle), 4) if EVENT.key == ' ' else 90
             builtins.result_file.write(str(builtins.task_id) + ',' + str(correct_angle) + ',' + str(logged_angle) + ',' + str(error) + '\n')
             builtins.errors.append(error)
 
