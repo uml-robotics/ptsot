@@ -69,7 +69,7 @@ INSTRUCTION_TEXT = "This is a test of your ability to imagine different perspect
 def main():
     matplotlib.rcParams['toolbar'] = 'None'
     subject_id = input("Please insert your participant ID: ")
-    result_file = open('results-' + str(subject_id) + '.txt', 'w+')
+    result_file = open('PTSOT-results-' + str(subject_id) + '.txt', 'w+')
 
     create_test_window(subject_id)
     create_instruction_window()
